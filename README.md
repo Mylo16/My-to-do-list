@@ -61,6 +61,8 @@ N/A
 
 
 - GitHub: [@Mylo16](https://github.com/Mylo16)
+- Twitter: @EricAnt33872607
+- LinkedIn: linkedin.com/in/eric-antwi-580650251
 
 ## 🔭 Future Features <a name="future-features"></a>
 
