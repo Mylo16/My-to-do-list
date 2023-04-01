@@ -1,50 +1,71 @@
 import './style.css';
+import localstorage from './localstorage.js';
+import userInteraction from './userInteraction.js';
 
-const todoData = [
-  {
-    description: 'Doing house chores',
-    completed: false,
-    index: 2,
-  },
-  {
-    description: 'Joining Microverse class',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'Taking a nap',
-    completed: false,
-    index: 0,
-  },
-];
+/* eslint max-classes-per-file: ["error", 3] */
 
-todoData.forEach(() => {
-  for (let i = 0; i < todoData.length - 1; i += 1) {
-    if (todoData[i].index > todoData[i + 1].index) {
-      const temp = todoData[i];
-      todoData[i] = todoData[i + 1];
-      todoData[i + 1] = temp;
+class List {
+  constructor(description, index) {
+    this.description = description;
+    this.index = index;
+  }
+}
+
+const { UI } = userInteraction;
+const { StorageInLocal } = localstorage;
+const store = new StorageInLocal();
+const storeArray = store.getLists();
+
+storeArray.map(() => {
+  for (let i = 0; i < storeArray.length - 1; i += 1) {
+    if (storeArray[i].index > storeArray[i + 1].index) {
+      const temp = storeArray[i];
+      storeArray[i] = storeArray[i + 1];
+      storeArray[i + 1] = temp;
     }
+  }
+  return null;
+});
+
+document.addEventListener('DOMContentLoaded', UI.displayAllLists);
+document.querySelector('#addForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const description = document.querySelector('.add-list').value;
+  const index = store.numberOfLists;
+  const list = new List(description, index);
+  UI.addList(list);
+  store.addList(list);
+  window.location.reload();
+  UI.clearFields();
+});
+
+$('#to-do-lists').on('dblclick', 'li', function active() {
+  $(this).parent().find('li.active').removeClass('active');
+  $(this).addClass('active');
+});
+
+document.getElementById('to-do-lists').addEventListener('click', (e) => {
+  if (e.target.classList.contains('del')) {
+    const btnID = e.target.parentElement.id;
+    const arrValues = btnID.split('-');
+    const idString = arrValues[arrValues.length - 1];
+    const id = parseInt(idString, 10);
+    store.removeList(id);
+    UI.deleteList(e.target);
+    window.location.reload();
   }
 });
 
-const renderList = ((item) => (`
-    <li id = "list-${item.index}" class="list">
-      <div class="list-left">
-        <form>
-          <input type = 'checkbox' class = "checkbox"/>
-        </form>
-        <p>${item.description}</p>
-      </div>
-      <div class = "dots">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-          <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-        </svg>
-      </div>
-    </li>
-  `));
-
-todoData.forEach((item) => {
-  const list = document.getElementById('to-do-lists');
-  list.innerHTML += renderList(item);
+document.addEventListener('DOMContentLoaded', () => {
+  Array.from(document.querySelectorAll('.list')).forEach((item) => {
+    const btnID = item.id;
+    const arrValues = btnID.split('-');
+    const idString = arrValues[arrValues.length - 1];
+    const index = parseInt(idString, 10);
+    item.children[0].children[1].addEventListener('change', () => {
+      const description = item.children[0].children[1].value;
+      store.updateList(index, description);
+      window.location.reload();
+    });
+  });
 });

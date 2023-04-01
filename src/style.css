@@ -72,7 +72,17 @@ a {
   width: 250%;
 }
 
-.checkbox {
+.description {
+  outline: none;
+  border: none;
+  font-size: 1em;
+  color: rgb(68, 68, 79);
+  width: 25em;
+  height: 2em;
+  background-color: transparent;
+}
+
+#checkbox {
   margin-right: 1em;
 }
 
@@ -86,4 +96,33 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.active {
+  background-color: rgb(232, 253, 115);
+}
+
+#del {
+  font-size: 1em;
+  position: relative;
+  left: 2%;
+}
+
+.del {
+  display: none;
+}
+
+.active .dots {
+  display: none;
+}
+
+.active .del {
+  display: block;
+  margin-right: 2em;
+  position: relative;
+}
+
+.note {
+  text-align: center;
+  margin-top: 2em;
 }
