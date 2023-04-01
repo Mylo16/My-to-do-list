@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/61d7e584a6.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,10 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300&display=swap" rel="stylesheet">
     <title>Wbpack Exercise</title>
 </head>
-<body>
+<body id="body">
     <section id="to-do-section">
         <div class="to-do-title-container border">
-            <h2 class="to-do-title">Tomorrow's To do</h2>
+            <h2 class="to-do-title">Today's To do</h2>
             <div class="recycle">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
@@ -21,7 +23,7 @@
             </div>
         </div>
         <div class="addTodo-list border">
-            <form action="">
+            <form id="addForm" action="">
                 <input type="text" placeholder="Add to your list..." class="add-list">
             </form>
             <div class="add">
@@ -36,5 +38,6 @@
         </ul>
         <a href="#completed" class="clear-all">Clear all completed</a>
     </section>
+    <p class="note">Note: Please double click on a list to allow editing</p>
 </body>
 </html>
