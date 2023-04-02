@@ -1,6 +1,7 @@
 import './style.css';
 import localstorage from './localstorage.js';
 import userInteraction from './userInteraction.js';
+import { statusCheck, statusUncheck } from './status.js';
 
 /* eslint max-classes-per-file: ["error", 3] */
 
@@ -67,5 +68,31 @@ document.addEventListener('DOMContentLoaded', () => {
       store.updateList(index, description);
       window.location.reload();
     });
+    item.children[0].children[0].addEventListener('change', (e) => {
+      if (item.children[0].children[0].checked) {
+        const btnID = e.target.id;
+        const arrValues = btnID.split('-');
+        const idString = arrValues[arrValues.length - 1];
+        const index = parseInt(idString, 10);
+        statusCheck(index);
+        window.location.reload();
+        item.children[0].children[0].checked = storeArray[index - 1].completed;
+      } else {
+        const btnID = e.target.id;
+        const arrValues = btnID.split('-');
+        const idString = arrValues[arrValues.length - 1];
+        const index = parseInt(idString, 10);
+        statusUncheck(index);
+        window.location.reload();
+        item.children[0].children[0].checked = storeArray[index - 1].completed;
+      }
+    });
+    item.children[0].children[0].checked = storeArray[index - 1].completed;
   });
+});
+
+document.querySelector('#clear').addEventListener('click', () => {
+  store.removeSelectedLists();
+  window.location.reload();
+  UI.displayAllLists();
 });

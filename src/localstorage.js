@@ -37,6 +37,15 @@ class StorageInLocal {
     todoLists[index - 1].description = description;
     localStorage.setItem('todoLists', JSON.stringify(todoLists));
   }
+
+  removeSelectedLists() {
+    const todoLists = this.getLists();
+    const filteredLists = todoLists.filter((list) => !list.completed);
+    for (let p = 0; p < filteredLists.length; p += 1) {
+      filteredLists[p].index = p + 1;
+    }
+    localStorage.setItem('todoLists', JSON.stringify(filteredLists));
+  }
 }
 
 export default {
