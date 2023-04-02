@@ -6,7 +6,7 @@ const store = new StorageInLocal();
 const renderList = ((item) => (`
     <li id = "list-${item.index}" class="list">
         <form id="update-form" class="list-left">
-          <input type = 'checkbox' id = 'checkbox'/>
+          <input type = 'checkbox' id = 'checkbox-${item.index}'/>
           <input type = 'text' class= 'description' readonly="true" ondblclick="this.readOnly='';" id = "description-${item.index}" value = "${item.description}"/>
         </form>
         <svg id = 'dots' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical dots" viewBox="0 0 16 16">
@@ -35,13 +35,13 @@ class UI {
     }
   }
 
+  static deleteSelectedLists(list) {
+    document.getElementById(list).remove();
+  }
+
   static clearFields() {
     document.querySelector('.add-list').value = '';
   }
-
-//   static showUpdatedList(index, description) {
-//     document.querySelector('#description').value
-//   }
 }
 
 export default {
