@@ -1,7 +1,7 @@
 import './style.css';
-import localstorage from './localstorage.js';
-import userInteraction from './userInteraction.js';
-import { statusCheck, statusUncheck } from './status.js';
+import localstorage from './modules/localstorage.js';
+import userInteraction from './modules/userInteraction.js';
+import { statusCheck, statusUncheck } from './modules/status.js';
 
 /* eslint max-classes-per-file: ["error", 3] */
 
@@ -35,7 +35,7 @@ document.querySelector('#addForm').addEventListener('submit', (e) => {
   const index = store.numberOfLists;
   const list = new List(description, index);
   UI.addList(list);
-  store.addList(list);
+  store.addList(list, storeArray);
   window.location.reload();
   UI.clearFields();
 });
@@ -51,7 +51,7 @@ document.getElementById('to-do-lists').addEventListener('click', (e) => {
     const arrValues = btnID.split('-');
     const idString = arrValues[arrValues.length - 1];
     const id = parseInt(idString, 10);
-    store.removeList(id);
+    store.removeList(id, storeArray);
     UI.deleteList(e.target);
     window.location.reload();
   }
