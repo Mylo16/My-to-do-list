@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Mylo16/My-to-do-list#readme",
   "devDependencies": {
     "css-loader": "^6.7.3",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.2",
     "webpack": "^5.77.0",
