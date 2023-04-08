@@ -1,6 +1,10 @@
+import addList from './addTodo.js';
+import removeList from './removeTodo.js';
+
 class StorageInLocal {
   constructor() {
     this.numberOfLists = this.getLists().length + 1;
+    this.storage = null;
   }
 
   getLists() {
@@ -13,23 +17,14 @@ class StorageInLocal {
     return this.todoLists;
   }
 
-  addList(list) {
-    const newList = {
-      index: this.numberOfLists, description: list.description, completed: false,
-    };
-    const todoLists = this.getLists();
-    todoLists.push(newList);
-    localStorage.setItem('todoLists', JSON.stringify(todoLists));
+  addList(list, storeArray) {
+    localStorage.setItem('todoLists', JSON.stringify(addList(list, storeArray)));
     this.numberOfLists += 1;
   }
 
-  removeList(index) {
-    const todoLists = this.getLists();
-    const filteredLists = todoLists.filter((list) => list.index !== index);
-    for (let j = index; j < filteredLists.length + 1; j += 1) {
-      filteredLists[j - 1].index = j;
-    }
-    localStorage.setItem('todoLists', JSON.stringify(filteredLists));
+  removeList(index, storeArray) {
+    localStorage.setItem('todoLists', JSON.stringify(removeList(index, storeArray)));
+    this.storage = removeList(index, storeArray);
   }
 
   updateList(index, description) {
