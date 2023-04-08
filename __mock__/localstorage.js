@@ -4,5 +4,5 @@ const todoLists = [
     description: 'happy Birthday',
     completed: false,
   },
-]
-module.exports = {todoLists}
+];
+module.exports = { todoLists };

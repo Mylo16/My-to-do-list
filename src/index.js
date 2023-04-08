@@ -1,5 +1,5 @@
 import './style.css';
-import localstorage from './modules/localstorage';
+import localstorage from './modules/localstorage.js';
 import userInteraction from './modules/userInteraction.js';
 import { statusCheck, statusUncheck } from './modules/status.js';
 

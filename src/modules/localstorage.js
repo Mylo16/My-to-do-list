@@ -1,5 +1,5 @@
-import { addList } from "./addTodo";
-import removeList from "./removeTodo";
+import addList from './addTodo.js';
+import removeList from './removeTodo.js';
 
 class StorageInLocal {
   constructor() {
@@ -23,8 +23,8 @@ class StorageInLocal {
   }
 
   removeList(index, storeArray) {
-    // this.storage = removeList(index, storeArray);
     localStorage.setItem('todoLists', JSON.stringify(removeList(index, storeArray)));
+    this.storage = removeList(index, storeArray);
   }
 
   updateList(index, description) {

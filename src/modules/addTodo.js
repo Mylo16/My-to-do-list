@@ -1,12 +1,10 @@
-
 function addList(list, storeArray) {
   const newList = {
     index: list.index, description: list.description, completed: false,
   };
   storeArray.push(newList);
-  return storeArray; 
+  return storeArray;
 }
-
-export {
+export default {
   addList,
-}
+};
